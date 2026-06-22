@@ -2,14 +2,11 @@ package model;
 
 public class Cliente {
     int id;
-    String nome, telefone, endereco;
+    String nome, telefone;
 
-    public Cliente(int id, String nome, String telefone){
-        this.id = id;
+    public Cliente(String nome, String telefone){
         this.nome = nome;
         this.telefone = telefone;
-    }
-    public Cliente(){
     }
     public Integer getId(){
         return this.id;
@@ -25,6 +22,9 @@ public class Cliente {
     }
     public void setTelefone(String telefone){
         this.telefone = telefone;
+    }
+    public void setId(int id){
+        this.id = id;
     }
 
 }
