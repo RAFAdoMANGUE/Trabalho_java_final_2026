@@ -16,10 +16,24 @@ public class RepositoryMemoria {
         contadorCliente++;
     }
     //--------------------------------------------------------------------------------------------
+    // Excluir cliente ---------------------------------------------------------------------------
+    public void excluiCliente(int idCliente){
+        this.clientes.removeIf(c -> c.getId() == idCliente);
+    }
+    //--------------------------------------------------------------------------------------------
+    public void editarCliente(int idCliente,String nome, String telefone){
+        for(int i = 0; i<clientes.size();i++){
+            if(clientes.get(i).getId() == idCliente){
+                clientes.get(i).setNome(nome);
+                clientes.get(i).setTelefone(telefone);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Cliente não encontrado");
+    }
+    //--------------------------------------------------------------------------------------------
 
-
-
-
-
-
+    public List<Cliente> retornaLista() {
+        return clientes;
+    }
 }
