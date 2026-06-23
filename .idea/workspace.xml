@@ -4,15 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7396cdd4-4d43-4da6-bb8f-a5d8a79f2033" name="Changes" comment="" />
+    <list default="true" id="7396cdd4-4d43-4da6-bb8f-a5d8a79f2033" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/repository/RepositoryMemoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/repository/RepositoryMemoria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/ClienteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ClienteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/TelaCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/TelaCliente.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="3EpEOmGUw7GeEHJVU3BUuP0Zre2" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -20,12 +29,35 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.TelaCliente.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "feature/tela-clientes",
     "kotlin-language-version-configured": "true",
-    "onboarding.tips.debug.path": "C:/Users/rafaelcaetano/Desktop/AtividadesJava2/trabalho_final_linguagem_orientada/src/Main.java"
+    "onboarding.tips.debug.path": "C:/Users/rafaelcaetano/Desktop/AtividadesJava2/trabalho_final_linguagem_orientada/src/Main.java",
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="TelaCliente" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="view.TelaCliente" />
+      <module name="Trabalho_java_final_2026" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.TelaCliente" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
