@@ -1,0 +1,22 @@
+# IntelliJ IDEA
+.idea/workspace.xml
+.idea/shelf/
+.idea/tasks.xml
+.idea/usage.statistics.xml
+.idea/dictionaries/
+.idea/httpRequests/
+
+# Arquivos compilados Java
+out/
+*.class
+
+# Build
+build/
+target/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
