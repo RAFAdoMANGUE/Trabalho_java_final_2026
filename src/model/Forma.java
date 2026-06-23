@@ -1,4 +1,6 @@
 package model;
 
-public class Forma {
+public interface Forma {
+    double calculaArea();
+    String descricao();
 }

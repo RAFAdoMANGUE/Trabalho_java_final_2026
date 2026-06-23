@@ -1,4 +1,7 @@
 package model;
 
-public class TipoPizza {
+public enum TipoPizza {
+    SIMPLES,
+    ESPECIAL,
+    PREMIUM
 }
