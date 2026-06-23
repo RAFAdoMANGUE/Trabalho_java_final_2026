@@ -109,5 +109,30 @@ public class ClienteService {
         return resultado;
     }
 
+    public List<Cliente> buscarPorTelefone(String telefone){
+        telefone = telefone.trim();
+
+        List<Cliente> resultado = new ArrayList<>();
+
+        if (telefone == null || telefone.isBlank()) {
+            throw new CampoInvalidoException("Telefone não podem ser vazios");
+        }
+
+        for (Cliente cliente : repositoryMemoria.retornaListaCliente()) {
+            boolean combinaTelefone = telefone.isBlank()
+                    || cliente.getTelefone().contains(telefone);
+
+            if (combinaTelefone) {
+                resultado.add(cliente);
+            }
+        }
+
+        if (resultado.isEmpty()) {
+            throw new ClienteNaoEncontradoException("Nenhum cliente encontrado");
+        }
+
+        return resultado;
+    }
+
 }
 
