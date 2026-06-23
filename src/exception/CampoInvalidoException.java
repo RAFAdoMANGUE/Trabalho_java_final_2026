@@ -1,8 +1,8 @@
 package exception;
 
-public class campoInvalidoException extends RuntimeException{
+public class CampoInvalidoException extends RuntimeException{
 
-    public campoInvalidoException(String message) {
+    public CampoInvalidoException(String message) {
         super(message);
     }
 }

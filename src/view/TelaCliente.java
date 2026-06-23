@@ -1,5 +1,7 @@
 package view;
 
+import exception.CampoInvalidoException;
+import exception.ClienteNaoEncontradoException;
 import model.Cliente;
 import service.ClienteService;
 
@@ -418,7 +420,7 @@ public class TelaCliente extends JFrame {
 
             JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso. ");
         }
-        catch(IllegalArgumentException e){
+        catch(CampoInvalidoException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
@@ -428,7 +430,7 @@ public class TelaCliente extends JFrame {
         int linhaSelecionada = tabelaClientes.getSelectedRow();
 
         if(linhaSelecionada == -1){
-            throw new IllegalArgumentException("Nenhuma linha foi selecionada");
+            throw new CampoInvalidoException("Nenhuma linha foi selecionada");
         }
 
         return linhaSelecionada;
@@ -465,7 +467,7 @@ public class TelaCliente extends JFrame {
             limparCampos();
 
             JOptionPane.showMessageDialog(this, "Cliente atualizado com sucesso. ");
-        }catch (IllegalArgumentException e){
+        }catch (CampoInvalidoException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
 
@@ -492,7 +494,7 @@ public class TelaCliente extends JFrame {
                 JOptionPane.showMessageDialog(this, "Cliente excluido com sucesso.");
             }
 
-        }catch(IllegalArgumentException e){
+        }catch(CampoInvalidoException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
@@ -519,7 +521,7 @@ public class TelaCliente extends JFrame {
 
             //ARRUMAR AQUI AS EXCECOES QUANDO FIZER AS PERSONALIZADAS
 
-        } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
+        } catch (CampoInvalidoException | ClienteNaoEncontradoException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
             limparFiltros();
         }

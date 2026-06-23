@@ -1,23 +1,26 @@
 package model;
 
 public class Sabor {
-    int idPedido;
+    int id;
     String nome;
     TipoPizza tipoPizza;
 
-    public void Sabor(int idPedido, String nome, TipoPizza tipoPizza){
-        this.idPedido = idPedido;
+    public Sabor(String nome, TipoPizza tipoPizza){
         this.nome = nome;
         this.tipoPizza = tipoPizza;
     }
     public int getIdPedido(){
-        return this.idPedido;
+        return this.id;
     }
     public String getNome(){
         return this.nome;
     }
     public TipoPizza getTipoPizza(){
         return this.tipoPizza;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setNome(String nome){
