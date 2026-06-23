@@ -20,7 +20,11 @@ public class RepositoryMemoria {
     //--------------------------------------------------------------------------------------------
     // Excluir cliente ---------------------------------------------------------------------------
     public void excluiCliente(int idCliente){
-        this.clientes.removeIf(c -> c.getId() == idCliente);
+        boolean removeu = clientes.removeIf(c -> c.getId() == idCliente);
+
+        if (!removeu) {
+            throw new IllegalArgumentException("Cliente não encontrado");
+        }
     }
     //--------------------------------------------------------------------------------------------
 
@@ -40,4 +44,17 @@ public class RepositoryMemoria {
     public List<Cliente> retornaLista() {
         return clientes;
     }
+
+    public Cliente buscarPorId(int idCliente){
+
+        for(Cliente cliente : clientes){
+
+            if(cliente.getId() == idCliente){
+                return cliente;
+            }
+        }
+
+        throw new IllegalArgumentException("Cliente não encontrado");
+    }
+
 }

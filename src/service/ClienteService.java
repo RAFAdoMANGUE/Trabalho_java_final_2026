@@ -3,6 +3,7 @@ package service;
 import model.Cliente;
 import repository.RepositoryMemoria;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClienteService {
@@ -57,4 +58,31 @@ public class ClienteService {
     public List<Cliente> mostrarClientes(){
         return repositoryMemoria.retornaLista();
     }
+
+    public Cliente buscarPorId(int idCliente){
+        return repositoryMemoria.buscarPorId(idCliente);
+    }
+
+    public List<Cliente> filtrarClientes(String sobrenome, String telefone) {
+        sobrenome = sobrenome.trim().toLowerCase();
+        telefone = telefone.trim();
+
+        List<Cliente> resultado = new ArrayList<>();
+
+        for (Cliente cliente : repositoryMemoria.retornaLista()) {
+            boolean combinaSobrenome = sobrenome.isBlank()
+                    || cliente.getSobrenome().toLowerCase().contains(sobrenome);
+
+            boolean combinaTelefone = telefone.isBlank()
+                    || cliente.getTelefone().contains(telefone);
+
+            if (combinaSobrenome && combinaTelefone) {
+                resultado.add(cliente);
+            }
+        }
+
+        return resultado;
+    }
+
 }
+
