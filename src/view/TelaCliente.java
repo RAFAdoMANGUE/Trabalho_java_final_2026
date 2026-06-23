@@ -455,7 +455,6 @@ public class TelaCliente extends JFrame {
 
             int idSelecionado = obterIdSelecionado();
 
-
             String nomeNovo = campoNome.getText();
             String sobrenomeNovo = campoSobrenome.getText();
             String telefoneNovo = campoTelefone.getText();

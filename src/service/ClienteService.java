@@ -10,7 +10,7 @@ import java.util.List;
 public class ClienteService {
     private RepositoryMemoria repositoryMemoria = new RepositoryMemoria();
 
-    public void cadastrarCliente(String nome, String sobrenome, String telefone){
+    public void cadastrarCliente(String nome, String sobrenome, String telefone) {
         validaCampos(nome, sobrenome, telefone);
         validarTelefoneDuplicado(telefone);
         Cliente cliente = new Cliente(nome, sobrenome, telefone);
@@ -18,48 +18,59 @@ public class ClienteService {
     }
 
 
-    public void excluirCliente(int idCliente){
+    public void excluirCliente(int idCliente) {
         repositoryMemoria.excluiCliente(idCliente);
     }
 
 
-    public void editarCliente(int idCliente, String nome, String sobrenome, String telefone){
+    public void editarCliente(int idCliente, String nome, String sobrenome, String telefone) {
         validaCampos(nome, sobrenome, telefone);
-        validarTelefoneDuplicado(telefone);
+        validarTelefoneDuplicadoEditar(idCliente, telefone);
         repositoryMemoria.editarCliente(idCliente, nome, sobrenome, telefone);
     }
 
-    public void validaCampos(String nome, String sobrenome, String telefone){
-        if(nome == null || nome.isBlank()){
+    public void validaCampos(String nome, String sobrenome, String telefone) {
+        if (nome == null || nome.isBlank()) {
             throw new IllegalArgumentException("Nome não pode ser vazio");
         }
 
-        if(sobrenome == null || sobrenome.isBlank()){
+        if (sobrenome == null || sobrenome.isBlank()) {
             throw new IllegalArgumentException("Sobrenome não pode ser vazio");
         }
 
-        if(telefone == null || telefone.isBlank()){
+        if (telefone == null || telefone.isBlank()) {
             throw new IllegalArgumentException("Telefone não pode ser nulo");
         }
 
-        if(telefone.length() != 11){
+        if (telefone.length() != 11) {
             throw new IllegalArgumentException("Numero inválido");
         }
     }
 
-    public void validarTelefoneDuplicado(String telefone){
-        for(Cliente cliente : repositoryMemoria.retornaLista()){
-            if(cliente.getTelefone().equals(telefone)){
+    public void validarTelefoneDuplicadoEditar(int id, String telefone) {
+        for (Cliente cliente : repositoryMemoria.retornaLista()) {
+            if (cliente.getTelefone().equals(telefone)) {
+                if (cliente.getId().equals(id)) {
+                    return;
+                }
                 throw new IllegalArgumentException("Já existe um cliente com esse telefone");
             }
         }
     }
 
-    public List<Cliente> mostrarClientes(){
+    public void validarTelefoneDuplicado(String telefone) {
+        for (Cliente cliente : repositoryMemoria.retornaLista()) {
+            if (cliente.getTelefone().equals(telefone)) {
+                throw new IllegalArgumentException("Já existe um cliente com esse telefone");
+            }
+        }
+    }
+
+    public List<Cliente> mostrarClientes() {
         return repositoryMemoria.retornaLista();
     }
 
-    public Cliente buscarPorId(int idCliente){
+    public Cliente buscarPorId(int idCliente) {
         return repositoryMemoria.buscarPorId(idCliente);
     }
 
@@ -69,7 +80,7 @@ public class ClienteService {
 
         List<Cliente> resultado = new ArrayList<>();
 
-        if((sobrenome == null || sobrenome.isBlank()) && (telefone == null || telefone.isBlank())){
+        if ((sobrenome == null || sobrenome.isBlank()) && (telefone == null || telefone.isBlank())) {
             throw new IllegalArgumentException("Sobrenome e telefone não podem ser vazios");
         }
 
@@ -85,7 +96,7 @@ public class ClienteService {
             }
         }
 
-        if(resultado.isEmpty()){
+        if (resultado.isEmpty()) {
             throw new ArrayIndexOutOfBoundsException("Nenhum cliente encontrado");
         }
 
