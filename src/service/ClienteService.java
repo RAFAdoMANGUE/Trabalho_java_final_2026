@@ -9,7 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClienteService {
-    private RepositoryMemoria repositoryMemoria = new RepositoryMemoria();
+
+    private RepositoryMemoria repositoryMemoria;
+
+    public ClienteService(RepositoryMemoria repositoryMemoria) {
+        this.repositoryMemoria = repositoryMemoria;
+    }
 
     public void cadastrarCliente(String nome, String sobrenome, String telefone) {
         validaCampos(nome, sobrenome, telefone);
