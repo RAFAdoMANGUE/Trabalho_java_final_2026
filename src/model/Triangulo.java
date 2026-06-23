@@ -1,6 +1,6 @@
 package model;
 
-public class Triangulo implements Forma{
+public class Triangulo extends Forma{
     private double lado;
     public void Triangulo(double lado){
         this.lado = lado;

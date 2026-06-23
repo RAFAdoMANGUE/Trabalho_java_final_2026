@@ -1,6 +1,6 @@
 package model;
 
-public interface Forma {
-    double calculaArea();
-    String descricao();
+public abstract class Forma {
+    public abstract double calculaArea();
+    public abstract String descricao();
 }

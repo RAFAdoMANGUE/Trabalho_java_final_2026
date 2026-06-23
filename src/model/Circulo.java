@@ -1,6 +1,6 @@
 package model;
 
-public class Circulo implements Forma{
+public class Circulo extends Forma{
     private double raio;
     public Circulo(){
 
@@ -13,10 +13,12 @@ public class Circulo implements Forma{
     public void setRaio(double raio) {
         this.raio = raio;
     }
+
     @Override
     public double calculaArea(){
         return Math.PI*(Math.pow(this.raio,2));
     }
+
     @Override
     public String descricao(){
         return "Raio de: " + raio;
