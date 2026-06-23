@@ -76,9 +76,9 @@ public class ClienteService {
         return repositoryMemoria.retornaListaCliente();
     }
 
-    public Cliente buscarPorId(int idCliente) {
-        return repositoryMemoria.buscarPorIdCliente(idCliente);
-    }
+//    public Cliente buscarPorId(int idCliente) {
+//        return repositoryMemoria.buscarPorIdCliente(idCliente);
+//    }
 
     public List<Cliente> filtrarClientes(String sobrenome, String telefone) {
         sobrenome = sobrenome.trim().toLowerCase();

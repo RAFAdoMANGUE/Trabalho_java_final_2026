@@ -1,7 +1,7 @@
 package model;
 
 public class Sabor {
-    int id;
+    int idSabor;
     String nome;
     TipoPizza tipoPizza;
 
@@ -9,8 +9,8 @@ public class Sabor {
         this.nome = nome;
         this.tipoPizza = tipoPizza;
     }
-    public int getIdPedido(){
-        return this.id;
+    public Integer getIdSabor(){
+        return this.idSabor;
     }
     public String getNome(){
         return this.nome;
@@ -19,8 +19,8 @@ public class Sabor {
         return this.tipoPizza;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdSabor(int id) {
+        this.idSabor = idSabor;
     }
 
     public void setNome(String nome){
