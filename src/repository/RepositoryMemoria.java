@@ -1,5 +1,8 @@
 package repository;
 
+import exception.CampoInvalidoException;
+import exception.ClienteNaoEncontradoException;
+import exception.SaborInvalidoException;
 import model.Cliente;
 import model.Sabor;
 import model.TipoPizza;
@@ -29,7 +32,7 @@ public class RepositoryMemoria {
         boolean removeu = clientes.removeIf(c -> c.getId() == idCliente);
 
         if (!removeu) {
-            throw new IllegalArgumentException("Cliente não encontrado");
+            throw new ClienteNaoEncontradoException("Cliente não encontrado");
         }
     }
     //--------------------------------------------------------------------------------------------
@@ -51,7 +54,7 @@ public class RepositoryMemoria {
                 return;
             }
         }
-        throw new IllegalArgumentException("Cliente não encontrado");
+        throw new ClienteNaoEncontradoException("Cliente não encontrado");
     }
     //--------------------------------------------------------------------------------------------
 
@@ -91,7 +94,7 @@ public class RepositoryMemoria {
         boolean removeu = sabores.removeIf(s -> s.getIdSabor() == idSabor);
 
         if (!removeu) {
-            throw new IllegalArgumentException("Sabor não encontrado");
+            throw new SaborInvalidoException("Sabor não encontrado");
         }
     }
     //--------------------------------------------------------------------------------------------
@@ -108,7 +111,7 @@ public class RepositoryMemoria {
                 return;
             }
         }
-        throw new IllegalArgumentException("Sabor não encontrado");
+        throw new SaborInvalidoException("Sabor não encontrado");
     }
     //--------------------------------------------------------------------------------------------
 

@@ -470,10 +470,7 @@ public class TelaCliente extends JFrame {
             limparCampos();
 
             JOptionPane.showMessageDialog(this, "Cliente atualizado com sucesso. ");
-        }catch (CampoInvalidoException e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-        catch (NenhumaLinhaSelecionadaException e){
+        }catch (CampoInvalidoException | NenhumaLinhaSelecionadaException | ClienteNaoEncontradoException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
 
@@ -499,10 +496,10 @@ public class TelaCliente extends JFrame {
 
                 JOptionPane.showMessageDialog(this, "Cliente excluido com sucesso.");
             }
-
-        }catch(CampoInvalidoException e){
+        }catch (CampoInvalidoException | NenhumaLinhaSelecionadaException | ClienteNaoEncontradoException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
+
     }
 
     public void filtrarClientes() {

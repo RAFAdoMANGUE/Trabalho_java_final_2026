@@ -1,6 +1,7 @@
 package view;
 
 import exception.CampoInvalidoException;
+import exception.NenhumaLinhaSelecionadaException;
 import exception.SaborInvalidoException;
 import model.Sabor;
 import model.TipoPizza;
@@ -337,7 +338,7 @@ public class TelaSabor extends JFrame {
         int linhaSelecionada = tabelaSabores.getSelectedRow();
 
         if (linhaSelecionada == -1) {
-            throw new CampoInvalidoException("Nenhuma linha foi selecionada");
+            throw new NenhumaLinhaSelecionadaException("Nenhuma linha foi selecionada");
         }
 
         return linhaSelecionada;
@@ -375,7 +376,7 @@ public class TelaSabor extends JFrame {
             limparCampos();
 
             JOptionPane.showMessageDialog(this, "Sabor atualizado com sucesso. ");
-        } catch (CampoInvalidoException | SaborInvalidoException e) {
+        } catch (CampoInvalidoException | SaborInvalidoException | NenhumaLinhaSelecionadaException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
 
@@ -401,7 +402,7 @@ public class TelaSabor extends JFrame {
                 JOptionPane.showMessageDialog(this, "Sabor excluído com sucesso.");
             }
 
-        } catch (CampoInvalidoException | SaborInvalidoException e) {
+        } catch (CampoInvalidoException | SaborInvalidoException | NenhumaLinhaSelecionadaException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
