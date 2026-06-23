@@ -89,7 +89,7 @@ public class SaborService {
                 if (sabor.getIdSabor().equals(idSabor)) {
                     return;
                 }
-                throw new CampoInvalidoException("Já existe outro sabor com esse nome");
+                throw new SaborInvalidoException("Já existe outro sabor com esse nome");
             }
         }
     }
