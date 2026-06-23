@@ -9,7 +9,7 @@ public class RepositoryMemoria {
 
     // Salvar cliente ---------------------------------------------------------------------------
     private List<Cliente> clientes = new ArrayList<>();
-    int contadorCliente;
+    int contadorCliente = 1;
 
     public void salvaCliente(Cliente cliente){
         cliente.setId(contadorCliente);
