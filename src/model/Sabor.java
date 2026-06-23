@@ -19,7 +19,7 @@ public class Sabor {
         return this.tipoPizza;
     }
 
-    public void setIdSabor(int id) {
+    public void setIdSabor(int idSabor) {
         this.idSabor = idSabor;
     }
 

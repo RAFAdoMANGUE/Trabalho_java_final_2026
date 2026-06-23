@@ -39,9 +39,15 @@ public class RepositoryMemoria {
     public void editarCliente(int idCliente, String nome, String sobrenome, String telefone){
         for (Cliente cliente : clientes) {
             if (cliente.getId().equals(idCliente)) {
-                cliente.setNome(nome);
-                cliente.setSobrenome(sobrenome);
+                if(!nome.isBlank()){
+                    cliente.setNome(nome);
+                }
+                if(!sobrenome.isBlank()){
+                    cliente.setSobrenome(sobrenome);
+                }
+                if(!telefone.isBlank()){
                 cliente.setTelefone(telefone);
+                }
                 return;
             }
         }
@@ -56,20 +62,6 @@ public class RepositoryMemoria {
     }
     //--------------------------------------------------------------------------------------------
 
-
-//    // Buscar cliente por Id ---------------------------------------------------------------------
-//    public Cliente buscarPorIdCliente(int idCliente){
-//
-//        for(Cliente cliente : clientes){
-//
-//            if(cliente.getId() == idCliente){
-//                return cliente;
-//            }
-//        }
-//
-//        throw new IllegalArgumentException("Cliente não encontrado");
-//    }
-    //--------------------------------------------------------------------------------------------
 
 
     // ==============================================================================================
@@ -109,7 +101,9 @@ public class RepositoryMemoria {
     public void editarSabor(int idSabor, String nome, TipoPizza tipo){
         for (Sabor sabor: sabores) {
             if (sabor.getIdSabor().equals(idSabor)) {
-                sabor.setNome(nome);
+                if(!nome.isBlank()){
+                    sabor.setNome(nome);
+                }
                 sabor.setTipoPizza(tipo);
                 return;
             }
@@ -124,32 +118,6 @@ public class RepositoryMemoria {
         return sabores;
     }
     //--------------------------------------------------------------------------------------------
-
-
-//    // Buscar sabor por Id ---------------------------------------------------------------------
-//    public Sabor buscarPorId(int idSabor){
-//
-//        for(Sabor sabor : sabores){
-//
-//            if(sabor.getIdSabor() == idSabor){
-//                return sabor;
-//            }
-//        }
-//
-//        throw new IllegalArgumentException("Cliente não encontrado");
-//    }
-    //--------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
 
 
 

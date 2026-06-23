@@ -2,6 +2,7 @@ package service;
 
 import exception.CampoInvalidoException;
 import exception.SaborInvalidoException;
+import model.Cliente;
 import model.Sabor;
 import model.TipoPizza;
 import repository.RepositoryMemoria;
@@ -19,6 +20,7 @@ public class SaborService {
 
     public void cadastrarSabor(String nome, TipoPizza tipo) {
         validarCampos(nome, tipo);
+        validarSaborDuplicado(nome);
         Sabor sabor = new Sabor(nome, tipo);
         repositoryMemoria.salvaSabor(sabor);
     }
@@ -28,11 +30,13 @@ public class SaborService {
     }
 
     public void editarSabor(int idSabor, String nome, TipoPizza tipo) {
-        validarCampos(nome, tipo);
+        if (tipo == null) {
+            throw new CampoInvalidoException("O Tipo da pizza é obrigatorio");
+        }
 
         nome = nome.trim();
 
-        validarSaborDuplicado(nome, idSabor);
+        validarSaboreDuplicadoEditar(idSabor, nome);
 
         repositoryMemoria.editarSabor(idSabor, nome, tipo);
     }
@@ -42,25 +46,19 @@ public class SaborService {
     }
 
 
-    public List<Sabor> listarPorTipo(TipoPizza tipo) {
-        if (tipo == null) {
-            throw new CampoInvalidoException("Tipo da pizza é obrigatório.");
-        }
+    public List<Sabor> listarPorSabor(String nomeSabor) {
 
         List<Sabor> resultado = new ArrayList<>();
 
-        for (Sabor sabor : repositoryMemoria.retornaListaSabor()) {
-            if (sabor.getTipoPizza() == tipo) {
-                resultado.add(sabor);
+        for (Sabor saborAtual : repositoryMemoria.retornaListaSabor()) {
+            if (nomeSabor.isBlank() || saborAtual.getNome().toLowerCase().contains(nomeSabor)) {
+                resultado.add(saborAtual);
             }
         }
 
         return resultado;
     }
-//
-//    public Sabor buscarSaborPorId(int idSabor) {
-//        return repositoryMemoria.buscarSaborPorId(idSabor);
-//    }
+
 
 
     public void validarCampos(String nome, TipoPizza tipo) {
@@ -74,7 +72,7 @@ public class SaborService {
         }
     }
 
-    private void validarSaborDuplicado(String nome, int idIgnorado) {
+    private void validarSaborDuplicado(String nome) {
         for (Sabor sabor : repositoryMemoria.retornaListaSabor()) {
             boolean mesmoNome = sabor.getNome().equalsIgnoreCase(nome);
 
@@ -83,5 +81,16 @@ public class SaborService {
             }
         }
 
+    }
+
+    public void validarSaboreDuplicadoEditar(int idSabor, String nome) {
+        for (Sabor sabor : repositoryMemoria.retornaListaSabor()) {
+            if (sabor.getNome().equalsIgnoreCase(nome)) {
+                if (sabor.getIdSabor().equals(idSabor)) {
+                    return;
+                }
+                throw new CampoInvalidoException("Já existe outro sabor com esse nome");
+            }
+        }
     }
 }
