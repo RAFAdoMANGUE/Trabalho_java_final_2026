@@ -29,11 +29,11 @@ public class RepositoryMemoria {
     //--------------------------------------------------------------------------------------------
 
     public void editarCliente(int idCliente, String nome, String sobrenome, String telefone){
-        for(int i = 0; i<clientes.size();i++){
-            if(clientes.get(i).getId() == idCliente){
-                clientes.get(i).setNome(nome);
-                clientes.get(i).setSobrenome(sobrenome);
-                clientes.get(i).setTelefone(telefone);
+        for (Cliente cliente : clientes) {
+            if (cliente.getId().equals(idCliente)) {
+                cliente.setNome(nome);
+                cliente.setSobrenome(sobrenome);
+                cliente.setTelefone(telefone);
                 return;
             }
         }
