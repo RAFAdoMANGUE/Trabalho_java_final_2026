@@ -2,6 +2,7 @@ package view;
 
 import exception.CampoInvalidoException;
 import exception.ClienteNaoEncontradoException;
+import exception.NenhumaLinhaSelecionadaException;
 import model.Cliente;
 import repository.RepositoryMemoria;
 import service.ClienteService;
@@ -432,7 +433,7 @@ public class TelaCliente extends JFrame {
         int linhaSelecionada = tabelaClientes.getSelectedRow();
 
         if(linhaSelecionada == -1){
-            throw new CampoInvalidoException("Nenhuma linha foi selecionada");
+            throw new NenhumaLinhaSelecionadaException("Nenhuma linha foi selecionada");
         }
 
         return linhaSelecionada;
@@ -470,6 +471,9 @@ public class TelaCliente extends JFrame {
 
             JOptionPane.showMessageDialog(this, "Cliente atualizado com sucesso. ");
         }catch (CampoInvalidoException e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        catch (NenhumaLinhaSelecionadaException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
 

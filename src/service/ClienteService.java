@@ -30,7 +30,7 @@ public class ClienteService {
 
 
     public void editarCliente(int idCliente, String nome, String sobrenome, String telefone) {
-        validaCampos(nome, sobrenome, telefone);
+        validaCamposEditar(nome, sobrenome, telefone);
         validarTelefoneDuplicadoEditar(idCliente, telefone);
         repositoryMemoria.editarCliente(idCliente, nome, sobrenome, telefone);
     }
@@ -52,6 +52,20 @@ public class ClienteService {
             throw new CampoInvalidoException("Numero inválido");
         }
     }
+
+
+    public void validaCamposEditar(String nome, String sobrenome, String telefone) {
+        if ((nome == null || nome.isBlank()) && (sobrenome == null || sobrenome.isBlank()) && (telefone == null || telefone.isBlank())) {
+            throw new CampoInvalidoException("Algum campo deve ser atualizado");
+        }
+
+        if (!telefone.isBlank()) {
+            if (telefone.length() != 11) {
+                throw new CampoInvalidoException("Numero inválido");
+            }
+        }
+    }
+
 
     public void validarTelefoneDuplicadoEditar(int id, String telefone) {
         for (Cliente cliente : repositoryMemoria.retornaListaCliente()) {
@@ -76,9 +90,6 @@ public class ClienteService {
         return repositoryMemoria.retornaListaCliente();
     }
 
-    public Cliente buscarPorId(int idCliente) {
-        return repositoryMemoria.buscarPorIdCliente(idCliente);
-    }
 
     public List<Cliente> filtrarClientes(String sobrenome, String telefone) {
         sobrenome = sobrenome.trim().toLowerCase();
@@ -98,6 +109,31 @@ public class ClienteService {
                     || cliente.getTelefone().contains(telefone);
 
             if (combinaSobrenome && combinaTelefone) {
+                resultado.add(cliente);
+            }
+        }
+
+        if (resultado.isEmpty()) {
+            throw new ClienteNaoEncontradoException("Nenhum cliente encontrado");
+        }
+
+        return resultado;
+    }
+
+    public List<Cliente> buscarPorTelefone(String telefone) {
+        telefone = telefone.trim();
+
+        List<Cliente> resultado = new ArrayList<>();
+
+        if (telefone == null || telefone.isBlank()) {
+            throw new CampoInvalidoException("Telefone não podem ser vazios");
+        }
+
+        for (Cliente cliente : repositoryMemoria.retornaListaCliente()) {
+            boolean combinaTelefone = telefone.isBlank()
+                    || cliente.getTelefone().contains(telefone);
+
+            if (combinaTelefone) {
                 resultado.add(cliente);
             }
         }

@@ -2,6 +2,7 @@ package repository;
 
 import model.Cliente;
 import model.Sabor;
+import model.TipoPizza;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +39,15 @@ public class RepositoryMemoria {
     public void editarCliente(int idCliente, String nome, String sobrenome, String telefone){
         for (Cliente cliente : clientes) {
             if (cliente.getId().equals(idCliente)) {
-                cliente.setNome(nome);
-                cliente.setSobrenome(sobrenome);
+                if(!nome.isBlank()){
+                    cliente.setNome(nome);
+                }
+                if(!sobrenome.isBlank()){
+                    cliente.setSobrenome(sobrenome);
+                }
+                if(!telefone.isBlank()){
                 cliente.setTelefone(telefone);
+                }
                 return;
             }
         }
@@ -56,22 +63,10 @@ public class RepositoryMemoria {
     //--------------------------------------------------------------------------------------------
 
 
-    // Buscar cliente por Id ---------------------------------------------------------------------
-    public Cliente buscarPorIdCliente(int idCliente){
-
-        for(Cliente cliente : clientes){
-
-            if(cliente.getId() == idCliente){
-                return cliente;
-            }
-        }
-
-        throw new IllegalArgumentException("Cliente não encontrado");
-    }
-    //--------------------------------------------------------------------------------------------
-
 
     // ==============================================================================================
+
+
 
 
 
@@ -80,74 +75,49 @@ public class RepositoryMemoria {
 
 
     // Salvar sabores ---------------------------------------------------------------------------
-    private List<Sabor> sabor = new ArrayList<>();
+    private List<Sabor> sabores = new ArrayList<>();
     int contadorSabor = 1;
 
     public void salvaSabor(Sabor sabor){
-        sabor.setId(contadorSabor);
-        this.sabor.add(sabor);
+        sabor.setIdSabor(contadorSabor);
+        this.sabores.add(sabor);
         contadorSabor++;
     }
     //--------------------------------------------------------------------------------------------
 
 
-    // Excluir cliente ---------------------------------------------------------------------------
-    public void excluiCientel(int idCliente){
-        boolean removeu = clientes.removeIf(c -> c.getId() == idCliente);
+    // Excluir sabor ---------------------------------------------------------------------------
+    public void excluiSabor(int idSabor){
+        boolean removeu = sabores.removeIf(s -> s.getIdSabor() == idSabor);
 
         if (!removeu) {
-            throw new IllegalArgumentException("Cliente não encontrado");
+            throw new IllegalArgumentException("Sabor não encontrado");
         }
     }
     //--------------------------------------------------------------------------------------------
 
 
-    // Editar cliente ---------------------------------------------------------------------------
-    public void editarSabor(int idCliente, String nome, String sobrenome, String telefone){
-        for (Cliente cliente : clientes) {
-            if (cliente.getId().equals(idCliente)) {
-                cliente.setNome(nome);
-                cliente.setSobrenome(sobrenome);
-                cliente.setTelefone(telefone);
+    // Editar sabor ---------------------------------------------------------------------------
+    public void editarSabor(int idSabor, String nome, TipoPizza tipo){
+        for (Sabor sabor: sabores) {
+            if (sabor.getIdSabor().equals(idSabor)) {
+                if(!nome.isBlank()){
+                    sabor.setNome(nome);
+                }
+                sabor.setTipoPizza(tipo);
                 return;
             }
         }
-        throw new IllegalArgumentException("Cliente não encontrado");
+        throw new IllegalArgumentException("Sabor não encontrado");
     }
     //--------------------------------------------------------------------------------------------
 
 
-    // retorna clientes  -------------------------------------------------------------------------
-    public List<Cliente> retornaListaSabor() {
-        return clientes;
+    // retorna sabor  -------------------------------------------------------------------------
+    public List<Sabor> retornaListaSabor() {
+        return sabores;
     }
     //--------------------------------------------------------------------------------------------
-
-
-    // Buscar cliente por Id ---------------------------------------------------------------------
-    public Cliente buscarPorId(int idCliente){
-
-        for(Cliente cliente : clientes){
-
-            if(cliente.getId() == idCliente){
-                return cliente;
-            }
-        }
-
-        throw new IllegalArgumentException("Cliente não encontrado");
-    }
-    //--------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
 
 
 
