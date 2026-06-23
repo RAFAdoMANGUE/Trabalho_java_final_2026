@@ -20,7 +20,7 @@ public class Triangulo extends Forma{
     }
     @Override
     public String descricao(){
-        return "lado de: " + lado;
+        return "Triangulo - lado de: " + lado;
     }
 
 }

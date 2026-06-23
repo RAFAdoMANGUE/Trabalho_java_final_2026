@@ -1,4 +1,7 @@
 package model;
 
-public class EstadoPedido {
+public enum EstadoPedido {
+    ABERTO,
+    A_CAMINHO,
+    ENTREGE
 }

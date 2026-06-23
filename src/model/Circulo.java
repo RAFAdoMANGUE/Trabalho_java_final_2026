@@ -21,6 +21,6 @@ public class Circulo extends Forma{
 
     @Override
     public String descricao(){
-        return "Raio de: " + raio;
+        return "Circulo - Raio de: " + raio;
     }
 }

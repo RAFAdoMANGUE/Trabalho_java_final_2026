@@ -20,7 +20,7 @@ public class Quadrado extends Forma{
 
     @Override
     public String descricao(){
-        return "Lado de: " + lado;
+        return "Quadrado - Lado de: " + lado;
     }
 
 }
