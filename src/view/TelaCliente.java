@@ -1,6 +1,9 @@
 package view;
 
+import exception.CampoInvalidoException;
+import exception.ClienteNaoEncontradoException;
 import model.Cliente;
+import repository.RepositoryMemoria;
 import service.ClienteService;
 
 import javax.swing.*;
@@ -15,7 +18,7 @@ import java.awt.event.MouseEvent;
 
 public class TelaCliente extends JFrame {
 
-    ClienteService cliente = new ClienteService();
+    private ClienteService clienteService;
 
     private JTextField campoNome;
     private JTextField campoSobrenome;
@@ -39,7 +42,8 @@ public class TelaCliente extends JFrame {
 
     private JLabel labelTotalClientes;
 
-    public TelaCliente() {
+    public TelaCliente(ClienteService clienteService) {
+        this.clienteService = clienteService;
         configurarJanela();
         inicializarComponentes();
         montarLayout();
@@ -278,7 +282,7 @@ public class TelaCliente extends JFrame {
     public void carregarTabela() {
         modeloTabela.setRowCount(0);
 
-        java.util.List<Cliente> clientes = cliente.mostrarClientes();
+        java.util.List<Cliente> clientes = clienteService.mostrarClientes();
 
         for (Cliente clienteAtual : clientes) {
             modeloTabela.addRow(new Object[]{
@@ -411,14 +415,14 @@ public class TelaCliente extends JFrame {
             String sobrenome = campoSobrenome.getText();
             String telefone = campoTelefone.getText();
 
-            cliente.cadastrarCliente(nome, sobrenome, telefone);
+            clienteService.cadastrarCliente(nome, sobrenome, telefone);
 
             limparCampos();
             carregarTabela();
 
             JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso. ");
         }
-        catch(IllegalArgumentException e){
+        catch(CampoInvalidoException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
@@ -428,7 +432,7 @@ public class TelaCliente extends JFrame {
         int linhaSelecionada = tabelaClientes.getSelectedRow();
 
         if(linhaSelecionada == -1){
-            throw new IllegalArgumentException("Nenhuma linha foi selecionada");
+            throw new CampoInvalidoException("Nenhuma linha foi selecionada");
         }
 
         return linhaSelecionada;
@@ -459,13 +463,13 @@ public class TelaCliente extends JFrame {
             String sobrenomeNovo = campoSobrenome.getText();
             String telefoneNovo = campoTelefone.getText();
 
-            cliente.editarCliente(idSelecionado, nomeNovo, sobrenomeNovo, telefoneNovo);
+            clienteService.editarCliente(idSelecionado, nomeNovo, sobrenomeNovo, telefoneNovo);
 
             carregarTabela();
             limparCampos();
 
             JOptionPane.showMessageDialog(this, "Cliente atualizado com sucesso. ");
-        }catch (IllegalArgumentException e){
+        }catch (CampoInvalidoException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
 
@@ -484,7 +488,7 @@ public class TelaCliente extends JFrame {
             );
 
             if(opcao == JOptionPane.YES_OPTION){
-                cliente.excluirCliente(idSelecionado);
+                clienteService.excluirCliente(idSelecionado);
 
                 carregarTabela();
                 limparCampos();
@@ -492,7 +496,7 @@ public class TelaCliente extends JFrame {
                 JOptionPane.showMessageDialog(this, "Cliente excluido com sucesso.");
             }
 
-        }catch(IllegalArgumentException e){
+        }catch(CampoInvalidoException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
@@ -502,7 +506,7 @@ public class TelaCliente extends JFrame {
             String sobrenome = campoFiltroSobrenome.getText();
             String telefone = campoFiltroTelefone.getText();
 
-            java.util.List<Cliente> clientesFiltrados = cliente.filtrarClientes(sobrenome, telefone);
+            java.util.List<Cliente> clientesFiltrados = clienteService.filtrarClientes(sobrenome, telefone);
 
             modeloTabela.setRowCount(0);
 
@@ -519,7 +523,7 @@ public class TelaCliente extends JFrame {
 
             //ARRUMAR AQUI AS EXCECOES QUANDO FIZER AS PERSONALIZADAS
 
-        } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
+        } catch (CampoInvalidoException | ClienteNaoEncontradoException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
             limparFiltros();
         }
@@ -528,7 +532,12 @@ public class TelaCliente extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            TelaCliente tela = new TelaCliente();
+
+            //criando temporariamente um objeto clienteService e Repository para testar a tela sem a principal
+            RepositoryMemoria repositoryMemoria = new RepositoryMemoria();
+            ClienteService clienteService1 = new ClienteService(repositoryMemoria);
+
+            TelaCliente tela = new TelaCliente(clienteService1);
             tela.setVisible(true);
         });
     }

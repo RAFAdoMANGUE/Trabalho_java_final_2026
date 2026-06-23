@@ -1,14 +1,20 @@
 package service;
 
+import exception.ClienteNaoEncontradoException;
+import exception.CampoInvalidoException;
 import model.Cliente;
 import repository.RepositoryMemoria;
 
-import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClienteService {
-    private RepositoryMemoria repositoryMemoria = new RepositoryMemoria();
+
+    private RepositoryMemoria repositoryMemoria;
+
+    public ClienteService(RepositoryMemoria repositoryMemoria) {
+        this.repositoryMemoria = repositoryMemoria;
+    }
 
     public void cadastrarCliente(String nome, String sobrenome, String telefone) {
         validaCampos(nome, sobrenome, telefone);
@@ -31,47 +37,47 @@ public class ClienteService {
 
     public void validaCampos(String nome, String sobrenome, String telefone) {
         if (nome == null || nome.isBlank()) {
-            throw new IllegalArgumentException("Nome não pode ser vazio");
+            throw new CampoInvalidoException("Nome não pode ser vazio");
         }
 
         if (sobrenome == null || sobrenome.isBlank()) {
-            throw new IllegalArgumentException("Sobrenome não pode ser vazio");
+            throw new CampoInvalidoException("Sobrenome não pode ser vazio");
         }
 
         if (telefone == null || telefone.isBlank()) {
-            throw new IllegalArgumentException("Telefone não pode ser nulo");
+            throw new CampoInvalidoException("Telefone não pode ser nulo");
         }
 
         if (telefone.length() != 11) {
-            throw new IllegalArgumentException("Numero inválido");
+            throw new CampoInvalidoException("Numero inválido");
         }
     }
 
     public void validarTelefoneDuplicadoEditar(int id, String telefone) {
-        for (Cliente cliente : repositoryMemoria.retornaLista()) {
+        for (Cliente cliente : repositoryMemoria.retornaListaCliente()) {
             if (cliente.getTelefone().equals(telefone)) {
                 if (cliente.getId().equals(id)) {
                     return;
                 }
-                throw new IllegalArgumentException("Já existe um cliente com esse telefone");
+                throw new CampoInvalidoException("Já existe um cliente com esse telefone");
             }
         }
     }
 
     public void validarTelefoneDuplicado(String telefone) {
-        for (Cliente cliente : repositoryMemoria.retornaLista()) {
+        for (Cliente cliente : repositoryMemoria.retornaListaCliente()) {
             if (cliente.getTelefone().equals(telefone)) {
-                throw new IllegalArgumentException("Já existe um cliente com esse telefone");
+                throw new CampoInvalidoException("Já existe um cliente com esse telefone");
             }
         }
     }
 
     public List<Cliente> mostrarClientes() {
-        return repositoryMemoria.retornaLista();
+        return repositoryMemoria.retornaListaCliente();
     }
 
     public Cliente buscarPorId(int idCliente) {
-        return repositoryMemoria.buscarPorId(idCliente);
+        return repositoryMemoria.buscarPorIdCliente(idCliente);
     }
 
     public List<Cliente> filtrarClientes(String sobrenome, String telefone) {
@@ -81,10 +87,10 @@ public class ClienteService {
         List<Cliente> resultado = new ArrayList<>();
 
         if ((sobrenome == null || sobrenome.isBlank()) && (telefone == null || telefone.isBlank())) {
-            throw new IllegalArgumentException("Sobrenome e telefone não podem ser vazios");
+            throw new CampoInvalidoException("Sobrenome e telefone não podem ser vazios");
         }
 
-        for (Cliente cliente : repositoryMemoria.retornaLista()) {
+        for (Cliente cliente : repositoryMemoria.retornaListaCliente()) {
             boolean combinaSobrenome = sobrenome.isBlank()
                     || cliente.getSobrenome().toLowerCase().contains(sobrenome);
 
@@ -97,7 +103,7 @@ public class ClienteService {
         }
 
         if (resultado.isEmpty()) {
-            throw new ArrayIndexOutOfBoundsException("Nenhum cliente encontrado");
+            throw new ClienteNaoEncontradoException("Nenhum cliente encontrado");
         }
 
         return resultado;
