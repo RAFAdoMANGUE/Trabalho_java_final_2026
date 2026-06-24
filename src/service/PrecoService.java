@@ -14,10 +14,6 @@ public class PrecoService {
         this.repositoryMemoria = repositoryMemoria;
     }
 
-    public TabelaPreco retornaTabelaPreco(){
-        return repositoryMemoria.retornaTabelaPrecos();
-    }
-
     public double getPrecoSimples(){
         return repositoryMemoria.retornaTabelaPrecos().getPrecoSimples();
     }
@@ -42,18 +38,6 @@ public class PrecoService {
         repositoryMemoria.editarPreco(tipo, valor);
     }
 
-    public void alterarTodosPrecos(double precoSimples, double precoEspecial, double precoPremium){
-
-        validarPreco(precoSimples);
-        validarPreco(precoEspecial);
-        validarPreco(precoPremium);
-
-        repositoryMemoria.editarPreco(TipoPizza.SIMPLES, precoSimples);
-        repositoryMemoria.editarPreco(TipoPizza.ESPECIAL, precoEspecial);
-        repositoryMemoria.editarPreco(TipoPizza.PREMIUM, precoPremium);
-
-    }
-
     public void validarTipo(TipoPizza tipo) {
         if (tipo == null) {
             throw new CampoInvalidoException("Tipo de pizza é obrigatório.");
@@ -65,4 +49,5 @@ public class PrecoService {
             throw new PrecoInvalidoException("O preço deve ser maior que zero.");
         }
     }
+
 }
