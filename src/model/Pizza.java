@@ -29,6 +29,9 @@ public class Pizza {
 
 
     public void adicionaSabor(Sabor sabor) {
+        if (this.sabor.size() >= 2) {
+            throw new PizzaComMaisDoisSabores("Pizza não pode ter mais de dois sabores");
+        }
         this.sabor.add(sabor);
     }
 

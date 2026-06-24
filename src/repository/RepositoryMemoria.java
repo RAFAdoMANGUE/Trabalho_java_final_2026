@@ -3,10 +3,7 @@ package repository;
 import exception.CampoInvalidoException;
 import exception.ClienteNaoEncontradoException;
 import exception.SaborInvalidoException;
-import model.Cliente;
-import model.Sabor;
-import model.TabelaPreco;
-import model.TipoPizza;
+import model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +22,9 @@ public class RepositoryMemoria {
 
     //---PRECOS--------------------------------------------
     private TabelaPreco tabelaPreco = new TabelaPreco();
+
+    //---PEDIDO---------------------------------------------
+    private List<Pedido> pedidos = new ArrayList<>();
     //==========================================================================================
 
 
@@ -155,6 +155,13 @@ public class RepositoryMemoria {
     }
 
     // ==============================================================================================
+
+
+    // === PEDIDOS =====================================================================================
+
+
+    // ==============================================================================================
+
 
 
 }
