@@ -5,6 +5,7 @@ import exception.ClienteNaoEncontradoException;
 import exception.SaborInvalidoException;
 import model.Cliente;
 import model.Sabor;
+import model.TabelaPreco;
 import model.TipoPizza;
 
 import java.util.ArrayList;
@@ -120,8 +121,16 @@ public class RepositoryMemoria {
     public List<Sabor> retornaListaSabor() {
         return sabores;
     }
-    //--------------------------------------------------------------------------------------------
-
+    //Cadastra TabelaPreco--------------------------------------------------------------------------------------------
+    private TabelaPreco tabelaPreco = new TabelaPreco();
+    public void cadastraTabelaPreco(double precoSimples, double precoEspecial, double precoPremium){
+        this.tabelaPreco.setPrecoSimples(precoSimples);
+        this.tabelaPreco.setPrecoEspecial(precoEspecial);
+        this.tabelaPreco.setPrecoPremium(precoPremium);
+    }
+    public TabelaPreco retornaTabelaPreco(){
+        return this.tabelaPreco;
+    }
 
 
 
