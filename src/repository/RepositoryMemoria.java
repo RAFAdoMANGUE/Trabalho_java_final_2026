@@ -200,6 +200,19 @@ public class RepositoryMemoria {
         return null;
     }
 
+    // Retorna pedidos por cliente ---------------------------------------------------------------------------
+    public List<Pedido> retornaPedidosPorCliente(int idCliente){
+
+        List<Pedido> pedidoCliente = new ArrayList<>();
+
+        for(Pedido pedidoAtual : pedidos){
+            if(pedidoAtual.getCliente().getId().equals(idCliente)){
+                pedidoCliente.add(pedidoAtual);
+            }
+        }
+
+        return pedidoCliente;
+    }
 
     // Retorna pedidos ---------------------------------------------------------------------------
     public List<Pedido> retornaListaPedido() {

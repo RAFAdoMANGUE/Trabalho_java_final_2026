@@ -91,6 +91,12 @@ public class PedidoService {
         return repositoryMemoria.buscaPedidoPorId(idPedido);
     }
 
+    public List<Pedido> listarPedidosPorCliente(Cliente cliente) {
+        validarCliente(cliente);
+
+        return repositoryMemoria.retornaPedidosPorCliente(cliente.getId());
+    }
+
     public void excluirPedido(int idPedido){
         if(idPedido <= 0){
             throw new CampoInvalidoException("Id do pedido inválido");
