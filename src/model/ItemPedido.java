@@ -3,6 +3,7 @@ package model;
 public class ItemPedido {
     private Pizza pizza;
     private int quantidade;
+  
     public ItemPedido(Pizza pizza, int quantidade){
         this.pizza = pizza;
         this.quantidade = quantidade;
