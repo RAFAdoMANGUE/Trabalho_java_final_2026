@@ -43,15 +43,21 @@ public class Pizza {
     public double calculaPreco(TabelaPreco tabelaPreco){
         return  calculaMediaPrecoSabores(tabelaPreco) * calculaArea();
     }
+
     private double calculaMediaPrecoSabores(TabelaPreco tabelaPreco){
+
         double soma = 0;
+
         if(this.sabor.isEmpty())
             throw new NenhumSabor("Sem nenhum sabor");
+
         if(sabor.size() > 2)
             throw new PizzaComMaisDoisSabores("Pizza não pode ter mais de dois sabores");
+
         for(Sabor sabor : this.sabor){
             soma += tabelaPreco.getPrecoPorTipo(sabor.getTipoPizza());
         }
+
         return soma / this.sabor.size();
     }
 }

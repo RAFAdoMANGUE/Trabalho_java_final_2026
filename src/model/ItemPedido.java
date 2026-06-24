@@ -12,12 +12,15 @@ public class ItemPedido {
     public Pizza getPizza() {
         return this.pizza;
     }
+
     public void setPizza(Pizza pizza) {
         this.pizza = pizza;
     }
+
     public int getQuantidade(){
         return this.quantidade;
     }
+
     public void setQuantidade(int quantidade){
         this.quantidade = quantidade;
     }
