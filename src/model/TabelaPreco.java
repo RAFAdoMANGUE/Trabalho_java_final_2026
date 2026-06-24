@@ -1,5 +1,6 @@
 package model;
 
+import exception.CampoInvalidoException;
 import model.TipoPizza;
 
 public class TabelaPreco {
@@ -7,8 +8,12 @@ public class TabelaPreco {
     private double precoEspecial;
     private double precoPremium;
 
-    public TabelaPreco(){
+    public TabelaPreco() {
+        this.precoSimples = 0.05;
+        this.precoEspecial = 0.07;
+        this.precoPremium = 0.10;
     }
+
     public double getPrecoSimples(){
         return this.precoSimples;
     }
@@ -20,18 +25,12 @@ public class TabelaPreco {
     public double getPrecoPremium() {
         return precoPremium;
     }
-    public void setPrecoSimples(double precoSimples) {
-        this.precoSimples = precoSimples;
-    }
 
-    public void setPrecoEspecial(double precoEspecial) {
-        this.precoEspecial = precoEspecial;
-    }
-
-    public void setPrecoPremium(double precoPremium) {
-        this.precoPremium = precoPremium;
-    }
     public double getPrecoPorTipo(TipoPizza tipo) {
+        if (tipo == null) {
+            throw new CampoInvalidoException("Tipo inválido");
+        }
+
         switch (tipo) {
             case SIMPLES:
                 return this.precoSimples;
@@ -40,7 +39,27 @@ public class TabelaPreco {
             case PREMIUM:
                 return this.precoPremium;
             default:
-                throw new IllegalArgumentException("Tipo inválido");
+                throw new CampoInvalidoException("Tipo inválido");
+        }
+    }
+
+    public void alterarPreco(TipoPizza tipo, double valor) {
+        if (tipo == null) {
+            throw new CampoInvalidoException("Tipo inválido");
+        }
+
+        switch (tipo) {
+            case SIMPLES:
+                this.precoSimples = valor;
+                break;
+            case ESPECIAL:
+                this.precoEspecial = valor;
+                break;
+            case PREMIUM:
+                this.precoPremium = valor;
+                break;
+            default:
+                throw new CampoInvalidoException("Tipo inválido");
         }
     }
 }
