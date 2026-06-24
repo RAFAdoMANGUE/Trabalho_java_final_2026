@@ -45,10 +45,15 @@ public class SaborService {
         return repositoryMemoria.retornaListaSabor();
     }
 
-
     public List<Sabor> listarPorSabor(String nomeSabor) {
 
         List<Sabor> resultado = new ArrayList<>();
+
+        if (nomeSabor == null) {
+            nomeSabor = "";
+        }
+
+        nomeSabor = nomeSabor.trim().toLowerCase();
 
         for (Sabor saborAtual : repositoryMemoria.retornaListaSabor()) {
             if (nomeSabor.isBlank() || saborAtual.getNome().toLowerCase().contains(nomeSabor)) {
