@@ -25,6 +25,7 @@ public class ClienteService {
 
 
     public void excluirCliente(int idCliente) {
+        repositoryMemoria.excluiPedidosCliente(idCliente);
         repositoryMemoria.excluiCliente(idCliente);
     }
 

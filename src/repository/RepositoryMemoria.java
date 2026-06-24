@@ -13,18 +13,19 @@ public class RepositoryMemoria {
     //=== ATRIBUTOS ============================================================================
 
     //---CLIENTES-----------------------------------------
-    private List<Sabor> sabores = new ArrayList<>();
-    int contadorSabor = 1;
-
-    //---SABORES------------------------------------------
     private List<Cliente> clientes = new ArrayList<>();
     int contadorCliente = 1;
+
+    //---SABORES------------------------------------------
+    private List<Sabor> sabores = new ArrayList<>();
+    int contadorSabor = 1;
 
     //---PRECOS--------------------------------------------
     private TabelaPreco tabelaPreco = new TabelaPreco();
 
     //---PEDIDO---------------------------------------------
     private List<Pedido> pedidos = new ArrayList<>();
+    int contadorPedido = 1;
     //==========================================================================================
 
 
@@ -34,10 +35,6 @@ public class RepositoryMemoria {
 
 
     //==========================================================================================
-
-
-
-
 
 
     //==== CLIENTE ==============================================================================
@@ -89,9 +86,6 @@ public class RepositoryMemoria {
     // ==============================================================================================
 
 
-
-
-
     //==== SABORES DA PIZZA ==========================================================================
 
     // Salvar sabores ---------------------------------------------------------------------------
@@ -135,8 +129,6 @@ public class RepositoryMemoria {
     // ==============================================================================================
 
 
-
-
     // === TABELA PRECOS =========================================================================================
 
     // retorna tebela preco  -------------------------------------------------------------------------
@@ -157,8 +149,62 @@ public class RepositoryMemoria {
     // ==============================================================================================
 
 
+
+
     // === PEDIDOS =====================================================================================
 
+    // Salvar pedido ---------------------------------------------------------------------------
+    public void salvaPedido(Pedido pedido) {
+        pedido.setIdPedido(contadorPedido);
+        this.pedidos.add(pedido);
+        contadorPedido++;
+    }
+
+
+    // Excluir pedido ---------------------------------------------------------------------------
+    public void excluiPedido(int idPedido) {
+        boolean removeu = pedidos.removeIf(pedido -> pedido.getIdPedido() == idPedido);
+
+        if (!removeu) {
+            throw new CampoInvalidoException("Pedido não encontrado");
+        }
+    }
+
+
+    // Excluir pedidos de um cliente ---------------------------------------------------------------------------
+    public void excluiPedidosCliente(int idCliente) {
+        pedidos.removeIf(pedido -> pedido.getCliente().getId() == idCliente);
+    }
+
+
+    // Buscar pedido por ID ---------------------------------------------------------------------------
+    public Pedido buscaPedidoPorId(int idPedido) {
+        for (Pedido pedido : pedidos) {
+            if (pedido.getIdPedido() == idPedido) {
+                return pedido;
+            }
+        }
+
+        throw new CampoInvalidoException("Pedido não encontrado");
+    }
+
+
+    // Buscar pedido aberto por cliente ---------------------------------------------------------------------------
+    public Pedido buscaPedidoAbertoPorCliente(Cliente cliente) {
+        for (Pedido pedido : pedidos) {
+            if (pedido.getCliente().getId().equals(cliente.getId()) && pedido.getEstadoPedido() == EstadoPedido.ABERTO) {
+                return pedido;
+            }
+        }
+
+        return null;
+    }
+
+
+    // Retorna pedidos ---------------------------------------------------------------------------
+    public List<Pedido> retornaListaPedido() {
+        return pedidos;
+    }
 
     // ==============================================================================================
 
