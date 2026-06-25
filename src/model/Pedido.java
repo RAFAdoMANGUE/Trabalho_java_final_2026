@@ -9,6 +9,7 @@ public class Pedido {
     private Cliente cliente;
     private List<ItemPedido> itens;
     private EstadoPedido estadoPedido;
+    private double precoTotal;
 
     public Pedido(Cliente cliente) {
         this.cliente = cliente;
@@ -46,6 +47,18 @@ public class Pedido {
 
     public void setEstadoPedido(EstadoPedido estadoPedido) {
         this.estadoPedido = estadoPedido;
+    }
+
+    public double getPrecoTotal() {
+        return this.precoTotal;
+    }
+
+    public void setPrecoTotal(double precoTotal) {
+        this.precoTotal = precoTotal;
+    }
+
+    public void atualizarPrecoTotal(TabelaPreco tabelaPreco) {
+        this.precoTotal = calculaTotal(tabelaPreco);
     }
 
     public void adicionaItem(ItemPedido itemPedido) {
