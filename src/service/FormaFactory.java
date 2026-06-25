@@ -2,60 +2,72 @@ package service;
 
 import exception.CampoInvalidoException;
 import model.Circulo;
+import model.Forma;
 import model.Quadrado;
 import model.Triangulo;
-import repository.RepositoryMemoria;
 
 public class FormaFactory {
 
-    private RepositoryMemoria repositoryMemoria;
-
-    public FormaFactory(RepositoryMemoria repositoryMemoria) {
-        this.repositoryMemoria = repositoryMemoria;
+    public Forma criarQuadradoPorLado(double lado) {
+        validarLadoQuadrado(lado);
+        return new Quadrado(lado);
     }
 
-    public Quadrado criarQuadradoPorLado(double lado) {
-        validaDimensao(lado, "Lado do quadrado");
-        Quadrado quadrado = new Quadrado();
-        quadrado.setLado(lado);
-        return quadrado;
+    public Forma criarCirculoPorRaio(double raio) {
+        validarRaioCirculo(raio);
+        return new Circulo(raio);
     }
 
-    public Circulo criarCirculoPorRaio(double raio) {
-        validaDimensao(raio, "Raio do circulo");
-        Circulo circulo = new Circulo();
-        circulo.setRaio(raio);
-        return circulo;
+    public Forma criarTrianguloPorLado(double lado) {
+        validarLadoTriangulo(lado);
+        return new Triangulo(lado);
     }
 
-    public Triangulo criarTrianguloPorLado(double lado) {
-        validaDimensao(lado, "Lado do triangulo");
-        Triangulo triangulo = new Triangulo();
-        triangulo.setLado(lado);
-        return triangulo;
-    }
+    public Forma criarQuadradoPorArea(double area) {
+        validarArea(area);
 
-    public Quadrado criarQuadradoPorArea(double area) {
-        validaDimensao(area, "Area do quadrado");
         double lado = Math.sqrt(area);
-        return criarQuadradoPorLado(lado);
+
+        return new Quadrado(lado);
     }
 
-    public Circulo criarCirculoPorArea(double area) {
-        validaDimensao(area, "Area do circulo");
+    public Forma criarCirculoPorArea(double area) {
+        validarArea(area);
+
         double raio = Math.sqrt(area / Math.PI);
-        return criarCirculoPorRaio(raio);
+
+        return new Circulo(raio);
     }
 
-    public Triangulo criarTrianguloPorArea(double area) {
-        validaDimensao(area, "Area do triangulo");
+    public Forma criarTrianguloPorArea(double area) {
+        validarArea(area);
+
         double lado = Math.sqrt((4 * area) / Math.sqrt(3));
-        return criarTrianguloPorLado(lado);
+
+        return new Triangulo(lado);
     }
 
-    public void validaDimensao(double valor, String nomeCampo) {
-        if (valor <= 0) {
-            throw new CampoInvalidoException(nomeCampo + " deve ser maior que zero");
+    private void validarArea(double area) {
+        if (area < 100 || area > 1600) {
+            throw new CampoInvalidoException("A área deve estar entre 100 e 1600 cm².");
+        }
+    }
+
+    private void validarLadoQuadrado(double lado) {
+        if (lado < 10 || lado > 40) {
+            throw new CampoInvalidoException("O lado do quadrado deve estar entre 10 e 40 cm.");
+        }
+    }
+
+    private void validarLadoTriangulo(double lado) {
+        if (lado < 20 || lado > 60) {
+            throw new CampoInvalidoException("O lado do triângulo deve estar entre 20 e 60 cm.");
+        }
+    }
+
+    private void validarRaioCirculo(double raio) {
+        if (raio < 7 || raio > 23) {
+            throw new CampoInvalidoException("O raio do círculo deve estar entre 7 e 23 cm.");
         }
     }
 }

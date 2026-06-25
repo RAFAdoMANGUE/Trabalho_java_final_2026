@@ -2,7 +2,9 @@ package model;
 
 public class Quadrado extends Forma{
     private double lado;
-    public Quadrado(){
+
+    public Quadrado(double lado){
+        this.lado = lado;
     }
 
     public double getLado() {

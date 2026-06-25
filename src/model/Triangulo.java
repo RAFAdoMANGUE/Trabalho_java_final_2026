@@ -2,7 +2,8 @@ package model;
 
 public class Triangulo extends Forma{
     private double lado;
-    public void Triangulo(double lado){
+
+    public Triangulo(double lado){
         this.lado = lado;
     }
 
@@ -18,6 +19,7 @@ public class Triangulo extends Forma{
     public double calculaArea(){
         return (Math.pow(this.lado,2) * Math.sqrt(3))/4;
     }
+
     @Override
     public String descricao(){
         return "Triangulo - lado de: " + lado;
