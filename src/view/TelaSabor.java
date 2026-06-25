@@ -432,15 +432,5 @@ public class TelaSabor extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            RepositoryMemoria repositoryMemoria = new RepositoryMemoria();
-            SaborService saborService = new SaborService(repositoryMemoria);
-
-            TelaSabor tela = new TelaSabor(saborService);
-            tela.setVisible(true);
-        });
-    }
-
 }
 

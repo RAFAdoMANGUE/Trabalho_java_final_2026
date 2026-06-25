@@ -524,24 +524,10 @@ public class TelaCliente extends JFrame {
 
             labelTotalClientes.setText("Total de clientes: " + clientesFiltrados.size());
 
-            //ARRUMAR AQUI AS EXCECOES QUANDO FIZER AS PERSONALIZADAS
-
         } catch (CampoInvalidoException | ClienteNaoEncontradoException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
             limparFiltros();
         }
     }
 
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-
-            //criando temporariamente um objeto clienteService e Repository para testar a tela sem a principal
-            RepositoryMemoria repositoryMemoria = new RepositoryMemoria();
-            ClienteService clienteService1 = new ClienteService(repositoryMemoria);
-
-            TelaCliente tela = new TelaCliente(clienteService1);
-            tela.setVisible(true);
-        });
-    }
 }

@@ -340,15 +340,4 @@ public class TelaPreco extends JFrame {
         campoPrecoPremium.setText("");
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-
-            // criando temporariamente um objeto PrecoService e Repository para testar a tela sem a principal
-            RepositoryMemoria repositoryMemoria = new RepositoryMemoria();
-            PrecoService precoService = new PrecoService(repositoryMemoria);
-
-            TelaPreco tela = new TelaPreco(precoService);
-            tela.setVisible(true);
-        });
-    }
 }

@@ -1101,29 +1101,4 @@ public class TelaPedido extends JFrame {
             throw new CampoInvalidoException("Selecione ou crie um pedido primeiro.");
         }
     }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                RepositoryMemoria repositoryMemoria = new RepositoryMemoria();
-
-                ClienteService clienteService = new ClienteService(repositoryMemoria);
-                SaborService saborService = new SaborService(repositoryMemoria);
-                PedidoService pedidoService = new PedidoService(repositoryMemoria);
-
-                clienteService.cadastrarCliente("João", "Silva", "41999999999");
-                clienteService.cadastrarCliente("Maria", "Oliveira", "41988889999");
-                clienteService.cadastrarCliente("Carlos", "Santos", "41977778888");
-
-                saborService.cadastrarSabor("Calabresa", TipoPizza.SIMPLES);
-                saborService.cadastrarSabor("Frango", TipoPizza.ESPECIAL);
-                saborService.cadastrarSabor("Camarão", TipoPizza.PREMIUM);
-                saborService.cadastrarSabor("Quatro Queijos", TipoPizza.ESPECIAL);
-
-                TelaPedido tela = new TelaPedido(clienteService, saborService, pedidoService);
-                tela.setVisible(true);
-            }
-        });
-    }
 }
