@@ -20,7 +20,7 @@ public class ClienteService {
         validaCampos(nome, sobrenome, telefone);
         validarTelefoneDuplicado(telefone);
         Cliente cliente = new Cliente(nome, sobrenome, telefone);
-        repositoryMemoria.salvaCliente(cliente); // Chama função que cadastra o cliente;
+        repositoryMemoria.salvaCliente(cliente);
     }
 
 
@@ -93,14 +93,15 @@ public class ClienteService {
 
 
     public List<Cliente> filtrarClientes(String sobrenome, String telefone) {
-        sobrenome = sobrenome.trim().toLowerCase();
-        telefone = telefone.trim();
-
-        List<Cliente> resultado = new ArrayList<>();
 
         if ((sobrenome == null || sobrenome.isBlank()) && (telefone == null || telefone.isBlank())) {
             throw new CampoInvalidoException("Sobrenome e telefone não podem ser vazios");
         }
+
+        sobrenome = sobrenome.trim().toLowerCase();
+        telefone = telefone.trim();
+
+        List<Cliente> resultado = new ArrayList<>();
 
         for (Cliente cliente : repositoryMemoria.retornaListaCliente()) {
             boolean combinaSobrenome = sobrenome.isBlank()

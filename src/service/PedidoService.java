@@ -172,13 +172,6 @@ public class PedidoService {
         repositoryMemoria.excluiPedido(idPedido);
     }
 
-    public void excluirPedidosCliente(int idCliente){
-        if(idCliente <= 0){
-            throw new CampoInvalidoException("Id do pedido inválido");
-        }
-
-        repositoryMemoria.excluiPedidosCliente(idCliente);
-    }
 
     public Pedido criarNovoPedido(Cliente cliente) {
         validarCliente(cliente);
@@ -283,7 +276,7 @@ public class PedidoService {
     }
 
 
-    //=== METODO PARA FILTRAR BUSCA EM STATUS PEDIDO ===============================================
+    //filtro de pedidos para status pedido
     public List<Pedido> listarPedidosPorSobrenomeCliente(String sobrenome) {
         List<Pedido> pedidosFiltrados = new ArrayList<>();
 

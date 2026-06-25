@@ -5,7 +5,6 @@ import exception.NenhumaLinhaSelecionadaException;
 import exception.SaborInvalidoException;
 import model.Sabor;
 import model.TipoPizza;
-import repository.RepositoryMemoria;
 import service.SaborService;
 
 import javax.swing.*;

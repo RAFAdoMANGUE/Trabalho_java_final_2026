@@ -2,7 +2,6 @@ package service;
 
 import exception.CampoInvalidoException;
 import exception.PrecoInvalidoException;
-import model.TabelaPreco;
 import model.TipoPizza;
 import repository.RepositoryMemoria;
 

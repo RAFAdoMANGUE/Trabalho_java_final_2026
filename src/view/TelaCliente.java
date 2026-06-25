@@ -4,7 +4,6 @@ import exception.CampoInvalidoException;
 import exception.ClienteNaoEncontradoException;
 import exception.NenhumaLinhaSelecionadaException;
 import model.Cliente;
-import repository.RepositoryMemoria;
 import service.ClienteService;
 
 import javax.swing.*;

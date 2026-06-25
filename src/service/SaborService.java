@@ -2,7 +2,6 @@ package service;
 
 import exception.CampoInvalidoException;
 import exception.SaborInvalidoException;
-import model.Cliente;
 import model.Sabor;
 import model.TipoPizza;
 import repository.RepositoryMemoria;
@@ -67,7 +66,6 @@ public class SaborService {
 
 
     public void validarCampos(String nome, TipoPizza tipo) {
-        nome = nome.trim();
 
         if (nome == null || nome.isBlank()) {
             throw new CampoInvalidoException("Nome não pode ser nulo");
@@ -75,6 +73,9 @@ public class SaborService {
         if (tipo == null) {
             throw new CampoInvalidoException("O Tipo da pizza é obrigatorio");
         }
+
+        nome = nome.trim();
+
     }
 
     private void validarSaborDuplicado(String nome) {

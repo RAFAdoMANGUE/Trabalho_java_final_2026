@@ -4,7 +4,6 @@ import exception.CampoInvalidoException;
 import exception.ClienteNaoEncontradoException;
 import exception.SaborInvalidoException;
 import model.*;
-import repository.RepositoryMemoria;
 import service.ClienteService;
 import service.PedidoService;
 import service.SaborService;

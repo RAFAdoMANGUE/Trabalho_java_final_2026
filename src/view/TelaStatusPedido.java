@@ -4,11 +4,7 @@ import exception.CampoInvalidoException;
 import model.Cliente;
 import model.EstadoPedido;
 import model.Pedido;
-import model.Sabor;
-import repository.RepositoryMemoria;
-import service.ClienteService;
 import service.PedidoService;
-import service.SaborService;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

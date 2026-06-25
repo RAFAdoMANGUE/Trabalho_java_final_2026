@@ -35,10 +35,6 @@ public class Pizza {
         this.sabor.add(sabor);
     }
 
-    public void removeSabor(Sabor sabor){
-        this.sabor.remove(sabor);
-    }
-
     public double calculaArea(){
         return forma.calculaArea();
     }

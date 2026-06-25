@@ -3,7 +3,6 @@ package view;
 import exception.CampoInvalidoException;
 import exception.PrecoInvalidoException;
 import model.TipoPizza;
-import repository.RepositoryMemoria;
 import service.PrecoService;
 
 import javax.swing.*;
