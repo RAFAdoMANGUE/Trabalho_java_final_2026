@@ -4,6 +4,7 @@ import exception.CampoInvalidoException;
 import model.*;
 import repository.RepositoryMemoria;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PedidoService {
@@ -149,10 +150,6 @@ public class PedidoService {
         pedido.setEstadoPedido(estadoPedido);
     }
 
-    public List<Pedido> listarPedidos(){
-        return repositoryMemoria.retornaListaPedido();
-    }
-
     public Pedido buscaPedidoPorId(int idPedido){
         if(idPedido <= 0){
             throw new CampoInvalidoException("Id do pedido inválido");
@@ -284,6 +281,29 @@ public class PedidoService {
             throw new CampoInvalidoException("Os dois sabores não podem ser iguais");
         }
     }
+
+
+    //=== METODO PARA FILTRAR BUSCA EM STATUS PEDIDO ===============================================
+    public List<Pedido> listarPedidosPorSobrenomeCliente(String sobrenome) {
+        List<Pedido> pedidosFiltrados = new ArrayList<>();
+
+        if (sobrenome == null) {
+            sobrenome = "";
+        }
+
+        sobrenome = sobrenome.trim().toLowerCase();
+
+        for (Pedido pedidoAtual : repositoryMemoria.retornaListaPedido()) {
+            Cliente cliente = pedidoAtual.getCliente();
+
+            if (sobrenome.isBlank() || cliente.getSobrenome().toLowerCase().contains(sobrenome)) {
+                pedidosFiltrados.add(pedidoAtual);
+            }
+        }
+
+        return pedidosFiltrados;
+    }
+
 
 
 }
