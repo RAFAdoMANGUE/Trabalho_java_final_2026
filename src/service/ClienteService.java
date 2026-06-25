@@ -122,19 +122,16 @@ public class ClienteService {
     }
 
     public List<Cliente> buscarPorTelefone(String telefone) {
+        if (telefone == null || telefone.isBlank()) {
+            throw new CampoInvalidoException("Telefone não pode ser vazio");
+        }
+
         telefone = telefone.trim();
 
         List<Cliente> resultado = new ArrayList<>();
 
-        if (telefone == null || telefone.isBlank()) {
-            throw new CampoInvalidoException("Telefone não podem ser vazios");
-        }
-
         for (Cliente cliente : repositoryMemoria.retornaListaCliente()) {
-            boolean combinaTelefone = telefone.isBlank()
-                    || cliente.getTelefone().contains(telefone);
-
-            if (combinaTelefone) {
+            if (cliente.getTelefone().contains(telefone)) {
                 resultado.add(cliente);
             }
         }

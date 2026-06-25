@@ -25,20 +25,26 @@ public class FormaFactory {
 
     public Forma criarQuadradoPorArea(double area) {
         validarArea(area);
+
         double lado = Math.sqrt(area);
-        return criarQuadradoPorLado(lado);
+
+        return new Quadrado(lado);
     }
 
     public Forma criarCirculoPorArea(double area) {
         validarArea(area);
+
         double raio = Math.sqrt(area / Math.PI);
-        return criarCirculoPorRaio(raio);
+
+        return new Circulo(raio);
     }
 
     public Forma criarTrianguloPorArea(double area) {
         validarArea(area);
+
         double lado = Math.sqrt((4 * area) / Math.sqrt(3));
-        return criarTrianguloPorLado(lado);
+
+        return new Triangulo(lado);
     }
 
     private void validarArea(double area) {
