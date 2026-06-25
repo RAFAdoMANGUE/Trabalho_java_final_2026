@@ -23,6 +23,7 @@ public class PedidoService {
 
         if (pedido == null) {
             pedido = new Pedido(cliente);
+            pedido.atualizarPrecoTotal(repositoryMemoria.retornaTabelaPrecos());
             repositoryMemoria.salvaPedido(pedido);
         }
 
@@ -35,6 +36,7 @@ public class PedidoService {
         ItemPedido item = criarItemPedido(tipoForma, dimensao, false, sabor1, sabor2, quantidade);
 
         pedido.adicionaItem(item);
+        pedido.atualizarPrecoTotal(repositoryMemoria.retornaTabelaPrecos());
     }
 
     public void adicionarPizzaPorArea(Pedido pedido, String tipoForma, double area, Sabor sabor1, Sabor sabor2, int quantidade) {
@@ -43,6 +45,7 @@ public class PedidoService {
         ItemPedido item = criarItemPedido(tipoForma, area, true, sabor1, sabor2, quantidade);
 
         pedido.adicionaItem(item);
+        pedido.atualizarPrecoTotal(repositoryMemoria.retornaTabelaPrecos());
     }
 
     private ItemPedido criarItemPedido(String tipoForma, double valor, boolean porArea, Sabor sabor1, Sabor sabor2, int quantidade) {
@@ -77,6 +80,7 @@ public class PedidoService {
 
         ItemPedido itemPedido = pedido.getItens().get(indiceItem);
         pedido.removeItem(itemPedido);
+        pedido.atualizarPrecoTotal(repositoryMemoria.retornaTabelaPrecos());
     }
 
     public void atualizarItem(Pedido pedido, int indiceItem, String tipoForma, double valor, boolean porArea,
@@ -90,6 +94,7 @@ public class PedidoService {
         ItemPedido novoItem = criarItemPedido(tipoForma, valor, porArea, sabor1, sabor2, quantidade);
 
         pedido.getItens().set(indiceItem, novoItem);
+        pedido.atualizarPrecoTotal(repositoryMemoria.retornaTabelaPrecos());
     }
 
     public String calcularResultadoMedida(String tipoForma, double valor, boolean porArea) {
@@ -128,7 +133,7 @@ public class PedidoService {
     public double calcularTotalPedido(Pedido pedido){
         validarPedido(pedido);
 
-        return pedido.calculaTotal(repositoryMemoria.retornaTabelaPrecos());
+        return pedido.getPrecoTotal();
     }
 
     public void alterarEstadoPedido(Pedido pedido, EstadoPedido estadoPedido){
@@ -188,6 +193,7 @@ public class PedidoService {
         }
 
         Pedido pedido = new Pedido(cliente);
+        pedido.atualizarPrecoTotal(repositoryMemoria.retornaTabelaPrecos());
         repositoryMemoria.salvaPedido(pedido);
 
         return pedido;
