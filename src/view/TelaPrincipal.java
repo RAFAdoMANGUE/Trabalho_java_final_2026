@@ -120,12 +120,12 @@ public class TelaPrincipal extends JFrame {
             }
         });
 
-//        botaoStatusPedidos.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                abrirTelaStatusPedidos();
-//            }
-//        });
+        botaoStatusPedidos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                abrirTelaStatusPedidos();
+            }
+        });
 
         botaoSair.addActionListener(new ActionListener() {
             @Override
@@ -155,10 +155,10 @@ public class TelaPrincipal extends JFrame {
         telaPreco.setVisible(true);
     }
 
-//    private void abrirTelaStatusPedidos() {
-//        TelaStatusPedido telaStatusPedido = new TelaStatusPedido(pedidoService);
-//        telaStatusPedido.setVisible(true);
-//    }
+    private void abrirTelaStatusPedidos() {
+        TelaStatusPedido telaStatusPedido = new TelaStatusPedido(pedidoService);
+        telaStatusPedido.setVisible(true);
+    }
 
     private void sair() {
         int opcao = JOptionPane.showConfirmDialog(
