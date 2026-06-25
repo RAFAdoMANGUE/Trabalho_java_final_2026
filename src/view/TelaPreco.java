@@ -43,13 +43,18 @@ public class TelaPreco extends JFrame {
         setSize(750, 480);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setResizable(false);
+        setResizable(true);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     private void inicializarComponentes() {
         campoPrecoSimples = new JTextField();
         campoPrecoEspecial = new JTextField();
         campoPrecoPremium = new JTextField();
+
+        campoPrecoSimples.setPreferredSize(new Dimension(0, 30));
+        campoPrecoEspecial.setPreferredSize(new Dimension(0, 30));
+        campoPrecoPremium.setPreferredSize(new Dimension(0, 30));
 
         botaoSalvarPrecos = new JButton("Salvar preços");
         botaoLimparCampos = new JButton("Limpar campos");
@@ -65,12 +70,18 @@ public class TelaPreco extends JFrame {
     }
 
     private void montarLayout() {
-        JPanel painelPrincipal = new JPanel(new BorderLayout(15, 15));
+        JPanel painelPrincipal = new JPanel(new GridBagLayout());
         painelPrincipal.setBorder(new EmptyBorder(20, 20, 20, 20));
 
-        painelPrincipal.add(criarPainelTopo(), BorderLayout.NORTH);
-        painelPrincipal.add(criarPainelCentral(), BorderLayout.CENTER);
-        painelPrincipal.add(criarPainelRodape(), BorderLayout.SOUTH);
+        JPanel painelConteudo = new JPanel(new BorderLayout(15, 15));
+        painelConteudo.setPreferredSize(new Dimension(1050, 560));
+        painelConteudo.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+        painelConteudo.add(criarPainelTopo(), BorderLayout.NORTH);
+        painelConteudo.add(criarPainelCentral(), BorderLayout.CENTER);
+        painelConteudo.add(criarPainelRodape(), BorderLayout.SOUTH);
+
+        painelPrincipal.add(painelConteudo);
 
         setContentPane(painelPrincipal);
     }
@@ -132,7 +143,7 @@ public class TelaPreco extends JFrame {
         painelInfo.add(Box.createVerticalStrut(4));
         painelInfo.add(labelExemplo);
 
-        painel.add(painelCampo, BorderLayout.CENTER);
+        painel.add(painelCampo, BorderLayout.NORTH);
         painel.add(painelInfo, BorderLayout.SOUTH);
 
         return painel;
@@ -156,7 +167,7 @@ public class TelaPreco extends JFrame {
         painelInfo.add(Box.createVerticalStrut(4));
         painelInfo.add(labelExemplo);
 
-        painel.add(painelCampo, BorderLayout.CENTER);
+        painel.add(painelCampo, BorderLayout.NORTH);
         painel.add(painelInfo, BorderLayout.SOUTH);
 
         return painel;
@@ -180,20 +191,25 @@ public class TelaPreco extends JFrame {
         painelInfo.add(Box.createVerticalStrut(4));
         painelInfo.add(labelExemplo);
 
-        painel.add(painelCampo, BorderLayout.CENTER);
+        painel.add(painelCampo, BorderLayout.NORTH);
         painel.add(painelInfo, BorderLayout.SOUTH);
 
         return painel;
     }
 
     private JPanel criarPainelAcoes() {
-        JPanel painelAcoes = new JPanel(new GridLayout(3, 1, 0, 10));
+        JPanel painelAcoes = new JPanel(new BorderLayout());
         painelAcoes.setBorder(BorderFactory.createTitledBorder("Ações"));
         painelAcoes.setPreferredSize(new Dimension(180, 0));
 
-        painelAcoes.add(botaoSalvarPrecos);
-        painelAcoes.add(botaoLimparCampos);
-        painelAcoes.add(botaoVoltar);
+        JPanel painelBotoes = new JPanel(new GridLayout(3, 1, 0, 10));
+        painelBotoes.setPreferredSize(new Dimension(160, 150));
+
+        painelBotoes.add(botaoSalvarPrecos);
+        painelBotoes.add(botaoLimparCampos);
+        painelBotoes.add(botaoVoltar);
+
+        painelAcoes.add(painelBotoes, BorderLayout.NORTH);
 
         return painelAcoes;
     }
@@ -230,7 +246,7 @@ public class TelaPreco extends JFrame {
         botaoVoltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //aqui falta adicionar quando a tela principal estiver pronta
+                dispose();
             }
         });
 

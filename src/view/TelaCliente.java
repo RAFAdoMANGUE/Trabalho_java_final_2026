@@ -58,6 +58,8 @@ public class TelaCliente extends JFrame {
         setMinimumSize(new Dimension(950, 600));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(true);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     private void inicializarComponentes() {
@@ -359,7 +361,7 @@ public class TelaCliente extends JFrame {
         botaoVoltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //aqui falta adicionar quando a tela principal estiver pronta
+                dispose();
             }
         });
 

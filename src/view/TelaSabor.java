@@ -48,6 +48,8 @@ public class TelaSabor extends JFrame {
         setMinimumSize(new Dimension(800, 500));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(true);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     private void inicializarComponentes() {
@@ -275,7 +277,7 @@ public class TelaSabor extends JFrame {
         botaoVoltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //aqui falta adicionar quando a tela principal estiver pronta
+                dispose();
             }
         });
 
